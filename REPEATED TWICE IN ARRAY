@@ -1,0 +1,29 @@
+#include<stdio.h>
+void repeating_element(int arr[], int n)
+{
+int i, j;
+int count = 0;
+printf("Repeating values");
+for(i = 0;i < n;i++)
+{
+if(arr[i]==arr[j])
+{
+printf("%d ", arr[j]);
+}
+}
+}
+}
+ int main()
+{
+int n;
+scanf("%d",&n);
+int arr[n];
+int i;
+for(i = 0; i < n; i++)
+{
+scanf("%d",&arr[i]);
+}
+repeating_element(arr,n);
+return 0;
+}
+C:\Users\M AKASH\Pictures\Screenshots\Screenshot 2023-12-21 223845.png
