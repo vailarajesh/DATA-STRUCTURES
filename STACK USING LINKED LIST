@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct Node {
+    int data;
+    struct Node* next;
+};
+struct Node* top = NULL;
+void push(int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = top;
+    top = newNode;
+    printf("%d pushed to stack\n", value);
+}
+void pop() {
+    if (top == NULL) {
+        printf("Stack is empty\n");
+    } else {
+        struct Node* temp = top;
+        printf("%d popped from stack\n", temp->data);
+        top = top->next;
+        free(temp);
+    }
+}
+void display() {
+    struct Node* temp = top;
+    printf("Stack: ");
+    while (temp != NULL) {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+    printf("\n");
+}
+void peek() {
+    if (top == NULL) {
+        printf("Stack is empty\n");
+    } else {
+        printf("Top element of stack is %d\n", top->data);
+    }
+}
+int main() {
+printf("v.rajesh\n");
+printf("192311037\n");
+    push(10);
+    push(20);
+    push(30);
+    display();
+    peek();
+    pop();
+    display();
+    peek();
+    return 0;
+}
+C:\Users\M AKASH\Pictures\Screenshots\Screenshot 2023-12-27 122102.png
