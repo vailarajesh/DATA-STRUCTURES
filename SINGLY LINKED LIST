@@ -1,0 +1,163 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct Node {
+    int data;
+    struct Node* next;
+};
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+struct Node* insertAtBeg(struct Node* head, int data) {
+    struct Node* newNode = createNode(data);
+    newNode->next = head;
+    return newNode;
+}
+void insertAtMid(struct Node* prevNode, int data) {
+    if (prevNode == NULL) {
+        printf("Previous node cannot be NULL");
+        return;
+    }
+    struct Node* newNode = createNode(data);
+    newNode->next = prevNode->next;
+    prevNode->next = newNode;
+}
+void insertAtEnd(struct Node* head, int data) {
+    struct Node* newNode = createNode(data);
+    struct Node* temp = head;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+    temp->next = newNode;
+}
+struct Node* deleteAtBeg(struct Node* head) {
+    if (head == NULL) {
+        printf("List is empty");
+        return NULL;
+    }
+    struct Node* temp = head;
+    head = head->next;
+    free(temp);
+    return head;
+}
+void deleteAtMid(struct Node* prevNode) {
+    if (prevNode == NULL || prevNode->next == NULL) {
+        printf("Cannot delete");
+        return;
+    }
+    struct Node* temp = prevNode->next;
+    prevNode->next = temp->next;
+    free(temp);
+}
+void deleteAtEnd(struct Node* head) {
+    if (head == NULL) {
+        printf("List is empty");
+        return;
+    }
+    struct Node* temp = head;
+    struct Node* prev = NULL;
+    while (temp->next != NULL) {
+        prev = temp;
+        temp = temp->next;
+    }
+    prev->next = NULL;
+    free(temp);
+}
+void display(struct Node* head) {
+    struct Node* temp = head;
+    while (temp != NULL) {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+int search(struct Node* head, int key) {
+    struct Node* temp = head;
+    int index = 0;
+    while (temp != NULL) {
+        if (temp->data == key) {
+            return index;
+        }
+        index++;
+        temp = temp->next;
+    }
+    return -1;
+}
+void sort(struct Node* head) {
+    struct Node* current = head;
+    struct Node* index = NULL;
+    int temp;
+    if (head == NULL) {
+        return;
+    }
+    else {
+        while (current != NULL) {
+            index = current->next;
+            while (index != NULL) {
+                if (current->data > index->data) {
+                    temp = current->data;
+                    current->data = index->data;
+                    index->data = temp;
+                }
+                index = index->next;
+            }
+            current = current->next;
+        }
+    }
+}
+int findMax(struct Node* head) {
+    int max = head->data;
+    struct Node* temp = head;
+    while (temp != NULL) {
+        if (temp->data > max) {
+            max = temp->data;
+        }
+        temp = temp->next;
+    }
+    return max;
+}
+int findMin(struct Node* head) {
+    int min = head->data;
+    struct Node* temp = head;
+    while (temp != NULL) {
+        if (temp->data < min) {
+            min = temp->data;
+        }
+        temp = temp->next;
+    }
+    return min;
+}
+int main() {
+    struct Node* head = createNode(1);
+    head->next = createNode(2);
+    head->next->next = createNode(3);
+    printf("Initial list: ");
+    display(head);
+    head = insertAtBeg(head, 0);
+    printf("After inserting at the beginning: ");
+    display(head);
+    insertAtMid(head->next, 5);
+    printf("After inserting at the middle: ");
+    display(head);
+    insertAtEnd(head, 6);
+    printf("After inserting at the end: ");
+    display(head);
+    head = deleteAtBeg(head);
+    printf("After deleting from the beginning: ");
+    display(head);
+    deleteAtMid(head->next);
+    printf("After deleting from the middle: ");
+    display(head);
+    deleteAtEnd(head);
+    printf("After deleting from the end: ");
+    display(head);
+    printf("Index of 3 in the list: %d\n", search(head, 3));
+    sort(head);
+    printf("After sorting the list: ");
+    display(head);
+    printf("Maximum value in the list: %d\n", findMax(head));
+    printf("Minimum value in the list: %d\n", findMin(head));
+    return 0;
+}
