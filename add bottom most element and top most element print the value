@@ -1,0 +1,32 @@
+#include <stdio.h>
+#define MAX_SIZE 100
+struct Stack {
+    int items[MAX_SIZE];
+    int top;
+};
+void push(struct Stack *s, int value) {
+    s->items[++s->top] = value;
+}
+int pop(struct Stack *s) {
+    return s->items[s->top--];
+}
+int main() {
+	printf("v.rajesh\n");
+	printf("192311037\n");
+    struct Stack stack1, stack2;
+    stack1.top = -1;
+    stack2.top = -1;
+    push(&stack1, 10);
+    push(&stack1, 20);
+    push(&stack1, 30);
+    push(&stack2, 40);
+    push(&stack2, 50);
+    push(&stack2, 60);
+    int sum1 = stack1.items[0] + stack1.items[stack1.top];
+    int sum2 = stack2.items[0] + stack2.items[stack2.top];
+    printf("Sum of bottom most and top most elements of stack1: %d\n", sum1);
+    printf("Sum of bottom most and top most elements of stack2: %d\n", sum2);
+
+    return 0;
+}
+C:\Users\M AKASH\Pictures\Screenshots\Screenshot 2023-12-27 213220.png
