@@ -1,0 +1,138 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct Node {
+    int data;
+    struct Node* next;
+};
+struct Node* head = NULL;
+void insertBeg(int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    
+    if (head == NULL) {
+        head = newNode;
+        newNode->next = head;
+    } else {
+        struct Node* temp = head;
+        while (temp->next != head) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+        newNode->next = head;
+        head = newNode;
+    }
+}
+void insertEnd(int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    
+    if (head == NULL) {
+        head = newNode;
+        newNode->next = head;
+    } else {
+        struct Node* temp = head;
+        while (temp->next != head) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+        newNode->next = head;
+    }
+}
+void deleteBeg() {
+    if (head == NULL) {
+        printf("List is empty\n");
+    } else {
+        struct Node* temp = head;
+        struct Node* lastNode = head;
+        while (lastNode->next != head) {
+            lastNode = lastNode->next;
+        }
+        head = head->next;
+        lastNode->next = head;
+        free(temp);
+    }
+}
+    if (head == NULL) {
+        printf("List is empty\n");
+    } else {
+        struct Node* temp = head;
+        struct Node* prevNode = NULL;
+        while (temp->next != head) {
+            prevNode = temp;
+            temp = temp->next;
+        }
+        if (temp == head) {
+            head = NULL;
+        } else {
+            prevNode->next = head;
+        }
+        free(temp);
+    }
+}
+    if (head == NULL) {
+        printf("List is empty\n");
+    } else {
+        struct Node* temp = head;
+        do {
+            printf("%d ", temp->data);
+            temp = temp->next;
+        } while (temp != head);
+        printf("\n");
+    }
+}
+int search(int value) {
+    struct Node* temp = head;
+    do {
+        if (temp->data == value) {
+            return 1;
+        }
+        temp = temp->next;
+    } while (temp != head);
+    return 0;
+}
+int findMax() {
+    if (head == NULL) {
+        printf("List is empty\n");
+        return -1;
+    } else {
+        int max = head->data;
+        struct Node* temp = head->next;
+        do {
+            if (temp->data > max) {
+                max = temp->data;
+            }
+            temp = temp->next;
+        } while (temp != head);
+        return max;
+    }
+}
+int findMin() {
+    if (head == NULL) {
+        printf("List is empty\n");
+        return -1;
+    } else {
+        int min = head->data;
+        struct Node* temp = head->next;
+        do {
+            if (temp->data < min) {
+                min = temp->data;
+            }
+            temp = temp->next;
+        } while (temp != head);
+        return min;
+    }
+}
+int main() {
+    insertBeg(10);
+    insertEnd(20);
+    insertEnd(30);
+    insertBeg(5);
+    display(); // Output: 5 10 20 30
+    deleteBeg();
+    deleteEnd();
+    display(); // Output: 10 20
+    printf("Search for 20: %d\n", search(20)); // Output: 1
+    printf("Max value: %d\n", findMax()); // Output: 20
+    printf("Min value: %d\n", findMin()); // Output: 10
+    return 0;
+}
