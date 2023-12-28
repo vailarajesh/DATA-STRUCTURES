@@ -1,0 +1,173 @@
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct Node {
+    int data;
+    struct Node* prev;
+    struct Node* next;
+} Node;
+Node* createNode(int data) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    newNode->data = data;
+    newNode->prev = NULL;
+    newNode->next = NULL;
+    return newNode;
+}
+void insertAtBeginning(Node** head, int data) {
+    Node* newNode = createNode(data);
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        newNode->next = *head;
+        (*head)->prev = newNode;
+        *head = newNode;
+    }
+}
+void insertAtMiddle(Node* prevNode, int data) {
+    if (prevNode == NULL) {
+        printf("Previous node cannot be NULL\n");
+        return;
+    }
+    Node* newNode = createNode(data);
+    newNode->next = prevNode->next;
+    prevNode->next = newNode;
+    newNode->prev = prevNode;
+    if (newNode->next != NULL) {
+        newNode->next->prev = newNode;
+    }
+}
+void insertAtEnd(Node** head, int data) {
+    Node* newNode = createNode(data);
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        Node* temp = *head;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+        newNode->prev = temp;
+    }
+}
+void deleteAtBeginning(Node** head) {
+    if (*head == NULL) {
+        printf("List is empty\n");
+        return;
+    }
+    Node* temp = *head;
+    *head = (*head)->next;
+    if (*head != NULL) {
+        (*head)->prev = NULL;
+    }
+    free(temp);
+}
+void deleteAtMiddle(Node* prevNode) {
+    if (prevNode == NULL || prevNode->next == NULL) {
+        printf("Cannot delete, node is NULL or next node is NULL\n");
+        return;
+    }
+    Node* temp = prevNode->next;
+    prevNode->next = temp->next;
+    if (temp->next != NULL) {
+        temp->next->prev = prevNode;
+    }
+    free(temp);
+}
+void deleteAtEnd(Node** head) {
+    if (*head == NULL) {
+        printf("List is empty\n");
+        return;
+    }
+    Node* temp = *head;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+    if (temp->prev != NULL) {
+        temp->prev->next = NULL;
+    } else {
+        *head = NULL;
+    }
+    free(temp);
+}
+void display(Node* head) {
+    while (head != NULL) {
+        printf("%d -> ", head->data);
+        head = head->next;
+    }
+    printf("NULL\n");
+}
+Node* search(Node* head, int data) {
+    while (head != NULL) {
+        if (head->data == data) {
+            return head;
+        }
+        head = head->next;
+    }
+    return NULL;
+}
+void sort(Node** head) {
+    Node* current = *head;
+    Node* index = NULL;
+    int temp;
+    if (*head == NULL) {
+        return;
+    } else {
+        while (current != NULL) {
+            index = current->next;
+            while (index != NULL) {
+                if (current->data > index->data) {
+                    temp = current->data;
+                    current->data = index->data;
+                    index->data = temp;
+                }
+                index = index->next;
+            }
+            current = current->next;
+        }
+    }
+}
+int findMax(Node* head) {
+    int max = head->data;
+    while (head != NULL) {
+        if (head->data > max) {
+            max = head->data;
+        }
+        head = head->next;
+    }
+    return max;
+}
+int findMin(Node* head) {
+    int min = head->data;
+    while (head != NULL) {
+        if (head->data < min) {
+            min = head->data;
+        }
+        head = head->next;
+    }
+    return min;
+}
+int main() {
+    Node* head = NULL;
+    insertAtBeginning(&head, 10);
+    insertAtEnd(&head, 20);
+    insertAtMiddle(head, 15);
+    display(head);
+    deleteAtBeginning(&head);
+    deleteAtMiddle(head);
+    deleteAtEnd(&head);
+    display(head);
+    insertAtBeginning(&head, 10);
+    insertAtEnd(&head, 20);
+    insertAtMiddle(head, 15);
+    display(head);
+    Node* searchResult = search(head, 20);
+    if (searchResult != NULL) {
+        printf("Element found: %d\n", searchResult->data);
+    } else {
+        printf("Element not found\n");
+    }
+    sort(&head);
+    display(head);
+    printf("Max: %d\n", findMax(head));
+    printf("Min: %d\n", findMin(head));
+    return 0;
+}
