@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct Node {
+    int data;
+    struct Node* next;
+};
+void push(struct Node** head_ref, int new_data) {
+    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+    new_node->data = new_data;
+    new_node->next = (*head_ref);
+    (*head_ref) = new_node;
+}
+void printList(struct Node* node) {
+    while (node != NULL) {
+        printf("%d ", node->data);
+        node = node->next;
+    }
+    printf("\n");
+}
+struct Node* intersect(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node** lastPtrRef = &result;
+    while (list1 != NULL && list2 != NULL) {
+        if (list1->data == list2->data) {
+            push(lastPtrRef, list1->data);
+            lastPtrRef = &((*lastPtrRef)->next);
+            list1 = list1->next;
+            list2 = list2->next;
+        } else if (list1->data < list2->data) {
+            list1 = list1->next;
+        } else {
+            list2 = list2->next;
+        }
+    }
+    return result;
+}
+int main() {
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+    struct Node* result = NULL;
+    push(&list1, 6);
+    push(&list1, 4);
+    push(&list1, 2);
+    push(&list1, 1);
+    printf("First list is: ");
+    printList(list1);
+    push(&list2, 8);
+    push(&list2, 6);
+    push(&list2, 4);
+    push(&list2, 2);
+    printf("Second list is: ");
+    printList(list2);
+    result = intersect(list1, list2);
+    printf("Intersected list is: ");
+    printList(result);
+    return 0;
+}
