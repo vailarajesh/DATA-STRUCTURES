@@ -78,3 +78,6 @@ Day 6
 1. Write a function that takes a string containing parentheses , square brackets  and curly braces "  ( { [ ] } " and determines if the symbols are balanced. 
 2.  Write a function to evaluate a given postfix expression. The expression is "44 2 / 6 -"
 3. Write a function to convert an infix expression to postfix notation. The infix expression is " "(a + b) * c + d "
+
+Day 9
+1. implement the c program for AVL tree and perform insertion and deletion of the nodes
