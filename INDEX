@@ -79,5 +79,42 @@ Day 6
 2.  Write a function to evaluate a given postfix expression. The expression is "44 2 / 6 -"
 3. Write a function to convert an infix expression to postfix notation. The infix expression is " "(a + b) * c + d "
 
+Day 7
+1.Implement Queue using array with following operations
+Enqueue( )
+Dequeue( )
+isEmpty( )
+isFull( )
+Display( )
+front( ) orPeek( )
+rear( )
+2 .Implement Queue using Linked List with following operations
+Enqueue( )
+Dequeue( )
+Display( )
+Front( )
+Rear( )
+3. Implement CircularQueue using array with following operations
+Enqueue( )
+Dequeue( )
+isEmpty( )
+isFull( )
+Display( )
+front( ) orPeek( )
+rear( )
+4 .Implement CircularQueue using Linked List with following operations
+Enqueue( )
+Dequeue( )
+Display( )
+Front( )
+Rear( )
+5. Implement Stack using two queues
+6. Implement Queue using two Stack
+
+Day 8:
+1.Implement Binary tree
+2. Implement Binary Search Tree and perform Insertion and Deletion
+3. Create Binary Search Tree with Tree Traversal (Inorder, Preorder, Postorder and Level order)
+
 Day 9
 1. implement the c program for AVL tree and perform insertion and deletion of the nodes
