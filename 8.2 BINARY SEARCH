@@ -123,7 +123,7 @@ void deletion(struct node *root,int num){
 
 
 int main() {
-    printf("Name: m.shashanka\nReg no:192311083\n");
+    printf("v.rajesh\n192311037\n");
     struct node *root=NULL;
     root = insert(root,10);
     root = insert(root,12);
@@ -141,3 +141,4 @@ int main() {
     leveltrav(root);
     return 0;
 }
+C:\Users\mrrag\Pictures\Screenshots\Screenshot 2024-01-03 133711.png
