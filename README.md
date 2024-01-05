@@ -1,9 +1,8 @@
 # DATA-STRUCTURES
 Day 1 - Arrays
-
 1.1 Addition of Two Matrices
 1.2 Multiplication of Two Matrices
-1.3 Sum of Diagonals
+1.3 Sum of 
 1.4 Transpose of a Matrix
 1.5 Insert element in array
 1.6 Delete element in array
