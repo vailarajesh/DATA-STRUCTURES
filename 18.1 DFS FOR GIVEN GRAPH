@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <stdbool.h>
+#define MAX_VERTICES 100
+typedef struct {
+    int vertices;
+    int edges;
+    int adjMatrix[MAX_VERTICES][MAX_VERTICES];
+} Graph;
+void initGraph(Graph *graph, int vertices) {
+    graph->vertices = vertices;
+    graph->edges = 0;
+    for (int i = 0; i < vertices; i++) {
+        for (int j = 0; j < vertices; j++) {
+            graph->adjMatrix[i][j] = 0;
+        }
+    }
+}
+void addEdge(Graph *graph, int src, int dest) {
+    graph->adjMatrix[src][dest] = 1;
+    graph->adjMatrix[dest][src] = 1;
+    graph->edges++;
+}
+void DFS(Graph *graph, int vertex, bool visited[]) {
+    visited[vertex] = true;
+    printf("%d ", vertex);
+    for (int i = 0; i < graph->vertices; i++) {
+        if (graph->adjMatrix[vertex][i] == 1 && !visited[i]) {
+            DFS(graph, i, visited);
+        }
+    }
+}
+void DFSTraversal(Graph *graph, int startVertex) {
+    bool visited[MAX_VERTICES] = {false};
+
+    DFS(graph, startVertex, visited);
+}
+int main() {
+	printf("\nname:V Balaram Krishna");
+	printf("\nreg no:192324049");
+    Graph graph;
+    int vertices, edges, src, dest;
+    printf("\nEnter the number of vertices: ");
+    scanf("%d", &vertices);
+    initGraph(&graph, vertices);
+    printf("Enter the number of edges: ");
+    scanf("%d", &edges);
+    for (int i = 0; i < edges; i++) {
+        printf("Enter edge %d (source destination): ", i + 1);
+        scanf("%d %d", &src, &dest);
+        addEdge(&graph, src, dest);
+    }
+    int startVertex;
+    printf("Enter the starting vertex for DFS: ");
+    scanf("%d", &startVertex);
+    printf("DFS traversal starting from vertex %d: ", startVertex);
+    DFSTraversal(&graph, startVertex);
+    return 0;
+}
+
+C:\Users\jahna\OneDrive\Pictures\Screenshots\Screenshot 2024-01-23 080903.png
